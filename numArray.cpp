@@ -1,3 +1,5 @@
+//Scan in 10 numbers and print them using arrays
+
 #include <stdio.h>
 #include <stdlib.h>
 
