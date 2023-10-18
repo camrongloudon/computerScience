@@ -5,36 +5,46 @@ of all the students that failed(pass mark = 50) */
 #include<stdlib.h>
 #include<string.h>
 
-int main ( ) {
-	char inputName[15], arrayName[100][15];
-	int counter, passed[100], failed[100], passMark;
-	float grade;
+int main () { 
+	int passCount, failCount;
+	char inputName[15], passedList[100][15], failedList[100][15];
+	float averageScore, passedGrade;
 	
-	counter = 0;
-	passMark = 50; 
+	passCount = 0;
+	failCount = 0;
+	passedGrade = 50.0;
 	
 	printf("What is your name: ");
 	scanf("%s", &inputName);
 	
-	printf("What is your average grade: ");
-	scanf("%f", &grade);
-	
-	strcpy( arrayName[counter], inputName );
-	while ( strcmp(inputName, "end") != 0 ) {
+	while (strcmp(inputName, "end") != 0) {
+		printf("What is your average score: ");
+		scanf("%f", &averageScore);
 		
-		if ( grade >= 50 ) 
-			passed[counter] = grade;
+		if (averageScore >= passedGrade) {
+			strcpy(passedList[passCount], inputName);
+			passCount++;
+		}
 		else {
-			failed[counter] = grade;
-			counter++;			
+			strcpy(failedList[failCount], inputName);
+			failCount++;
 		}
 		
 		printf("What is your name: ");
-		scanf("%s", &inputName);
-		
-		printf("What is your average grade: ");
-		scanf("%f", &grade);
-	}
-
+		scanf("%s", &inputName);	
+	}	
 	
+	printf("The following students PASSED: ");
+	for (int x = 0; x <= passCount; x++) {
+		printf("\n");
+		printf("%s", passedList[x]);
+	}
+	
+	printf("\n");
+
+	printf("The following students FAILED: ");
+	for (int x = 0; x <= failCount; x++) {
+		printf("\n");
+		printf("%s", failedList[x]);	
+	}
 }
