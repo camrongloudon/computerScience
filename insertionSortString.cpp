@@ -4,38 +4,38 @@
 #include<stdlib.h>
 #include<string.h>
 
-void insertionsort(char arr[][25], int size) {
+void insertionsort(char arr[5][25], int size) {
 	int i, j;
+	char Ai[25];
 	
 	for (int i = 1; i < size; i++) {
-		char Ai[0][25];
-		strcpy(Ai[0], arr[i]);
+		strcpy(Ai, arr[i]);
 		j = i - 1;
-		while(j >= 0 && strcmp(arr[j], Ai[0]) == -1) {
-			arr[j + 1] = arr[j];
+		while(j >= 0 && strcmp(arr[j], Ai) == 1) {
+			strcpy(arr[j + 1], arr[j]);
 				j = j - 1;
-		} 
-		arr[j + 1] = Ai[0];
+		}
+		strcpy(arr[j + 1], Ai);
 	}
 }
 
 int main ( ) {
-//	int num[ 15 ];
-//
-//	for (int x = 0; x < 5; x++) {
-//		printf("Enter a number: ");
-//		scanf("%d", &num[x]);
-//	}
-//	printf("ENTERED ARRAY \n");
-//	for (int x = 0; x < 5; x++) {
-//		printf("%d, ", num[x]);
-//	}	
-//	
-//	insertionsort(num, 5);
-//
-//	printf("\n SORTED ARRAY \n");
-//	for (int x = 0; x < 5; x++) {
-//		printf("%d, ", num[x]);
-//	}
+	char name[5][25];
 
+	for (int x = 0; x < 5; x++) {
+		printf("Enter a name: ");
+		scanf("%s", &name[x]);
+	}
+	
+	printf("ENTERED ARRAY \n");
+	for (int x = 0; x < 5; x++) {
+		printf("%s, ", name[x]);
+	}	
+	
+	insertionsort(name, 5);
+
+	printf("\n SORTED ARRAY \n");
+	for (int x = 0; x < 5; x++) {
+		printf("%s, ", name[x]);
+	}
 }

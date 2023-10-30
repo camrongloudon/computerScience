@@ -1,13 +1,13 @@
 //Insertion Sort
 
-#include <stdio.h>
-#include <stdlib.h>
+#include<stdio.h>
+#include<stdlib.h>
 
-void insertionsort(int arr[], int size) {
+void insertionsort(int arr[], int size) { //1
 	int i, j;
 	
 	for (int i = 1; i < size; i++) {
-		int Ai = arr[i];
+		int Ai = arr[i]; //2 
 		j = i - 1;
 		while(j >= 0 && arr[j] > Ai) {
 			arr[j + 1] = arr[j];
