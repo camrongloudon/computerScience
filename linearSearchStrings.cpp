@@ -21,7 +21,7 @@ int main ( ) {
 		scanf("%s", &word[x]);
 	}
 	
-	int position = linearSearch(word, 3, searchWord);
+	int position = linearSearch(word, 5, searchWord);
 		
 	printf("The WORD you search is at position %d", position);
 }
