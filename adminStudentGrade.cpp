@@ -10,30 +10,38 @@
 #include<stdlib.h>
 #include<string.h>
 
-void insertionSortHigh(float arr[], char name[][15], int size) { 
-	int i, j;
+void selectionSortHigh(float arr[], char name[][25], int size) {
+	for (int i = 0; i < size - 1; i++) {
+		int smallest = i;
+		for (int y = i + 1; y < size; y++) {
+			if (arr[y] > arr[smallest])
+				smallest = y;
+		}
+	int temp = arr[smallest];
+	arr[smallest] = arr[i];
+	arr[i] = temp;
 	
-	for (int i = 1; i < size; i++) {
-		int Ai = arr[i]; 
-		j = i - 1;
-		while(j >= 0 && arr[j] < Ai) {
-			arr[j + 1] = arr[j];
-			j = j - 1;
-		} 
-		arr[j + 1] = Ai;
+	char tempName[25];
+        strcpy(tempName, name[smallest]);
+        strcpy(name[smallest], name[i]);
+        strcpy(name[i], tempName);
 	}
 }
-void insertionSortLow(float arr[], char name[][15], int size) { 
-	int i, j;
+void selectionSortLow(float arr[], char name[][25], int size) {
+	for (int i = 0; i < size - 1; i++) {
+		int smallest = i;
+		for (int y = i + 1; y < size; y++) {
+			if (arr[y] < arr[smallest])
+				smallest = y;
+		}
+	int temp = arr[smallest];
+	arr[smallest] = arr[i];
+	arr[i] = temp;
 	
-	for (int i = 1; i < size; i++) {
-		int Ai = arr[i]; 
-		j = i - 1;
-		while(j >= 0 && arr[j] > Ai) {
-			arr[j + 1] = arr[j];
-			j = j - 1;
-		} 
-		arr[j + 1] = Ai;
+	char tempName[25];
+        strcpy(tempName, name[smallest]);
+        strcpy(name[smallest], name[i]);
+        strcpy(name[i], tempName);
 	}
 }
 int linearSearch(char arr[][25], int size, char key[25]) {
@@ -44,14 +52,15 @@ int linearSearch(char arr[][25], int size, char key[25]) {
 }
 
 int main ( ) {
-	int passCount, failCount, position;
-	char inputName[15], passedList[100][15], failedList[100][15], searchWord[25];
-	float averageScore, passedGrade, passArray[100], failArray[100];
+	int passCount, failCount, loopCounter, position;
+	char inputName[25], passedNames[100][25], failedNames[100][25], searchWord[25], allNames[100][25];
+	float averageScore, passingGrade, passGrades[100], failGrades[100], allGrades[100];
 	
 	passCount = 0;
 	failCount = 0;
-	passedGrade = 50.0;
-	
+	passingGrade = 50.0;
+	loopCounter = 0; 
+
 	printf("What is your name: ");
 	scanf("%s", &inputName);
 	
@@ -59,48 +68,52 @@ int main ( ) {
 		printf("What is your average score: ");
 		scanf("%f", &averageScore);
 		
-		if (averageScore >= passedGrade) {
-			strcpy(passedList[passCount], inputName);
-			passArray[passCount] = averageScore;
+		strcpy(allNames[loopCounter], inputName);
+		allGrades[loopCounter] = averageScore; 
+
+		if (averageScore >= passingGrade) {
+			strcpy(passedNames[passCount], inputName);
+			passGrades[passCount] = averageScore;
 			passCount++;
 		}
 		else {
-			strcpy(failedList[failCount], inputName);
-			failArray[failCount] = averageScore;
+			strcpy(failedNames[failCount], inputName);
+			failGrades[failCount] = averageScore;
 			failCount++;
 		}
-		
+		loopCounter++;
 		printf("What is your name: ");
 		scanf("%s", &inputName);	
-	}	
+		
+	}
 	
-	insertionSortHigh(passArray, passedList, passCount);
-	insertionSortLow(failArray, failedList, failCount);
-	
-	printf("The following students PASSED: ");
+	printf("STUDENTS THAT PASSED BELOW!");
+	selectionSortHigh(passGrades, passedNames, passCount);
 	for (int x = 0; x <= passCount - 1; x++) {
 		printf("\n");
-		printf("%s: %5.2f", passedList[x], passArray[x]);
+		printf("%s: %5.2f", passedNames[x], passGrades[x]);
 	}
+	printf("\n \n");
 	
-	printf("\n");
-	printf("\n");
-	
-	printf("The following students FAILED: ");
+	printf("STUDENTS THAT FAILED BELOW!");
+	selectionSortLow(failGrades, failedNames, failCount);
 	for (int x = 0; x <= failCount - 1; x++) {
 		printf("\n");
-		printf("%s: %5.2f", failedList[x], failArray[x]);	
+		printf("%s: %5.2f", failedNames[x], failGrades[x]);
 	}
-//
-	printf("Please enter a NAME to search: ");
-	scanf("%s", &searchWord);
-	
-	position = linearSearch(passArray, passCount, searchWord);
-	if (position = -1)
-		printf("There is no student by that name!");
-	else {
-		printf("%s : %d", passedList[position], passArray[position]);
-		
-	}	
-}
+	printf("\n \n");
 
+	printf("Enter student NAME to search( type 0 to exit ): ");
+	scanf("%s", &searchWord);
+	while(strcmp(searchWord, "0") != 0) {
+		position = linearSearch(allNames, loopCounter, searchWord);
+		printf("%s: %5.2f", allNames[position], allGrades[position]);
+		printf(" \n \n");	
+
+		printf("Enter a student NAME to search( type 0 to exit ): ");
+		scanf("%s", &searchWord);
+	}
+
+	printf(" \n \n \nGOODBYE! \n \n \n");	
+	//明智人
+}
