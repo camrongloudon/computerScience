@@ -21,14 +21,17 @@ void selectionSortLow(float arr[], char name[][20], int size) {
 }
 int main ( ) {
 	int counter;
-	float timeTaken[100];
-	char name[100][20];
+	float timeTaken[100], times[100];
+	char name[100][20], fileNames[100][20], choice[1];
 	
 	counter = 0;
 
+	printf("Would you like to enter new scores of see previous? enter y for yes, n for no");
+	scanf("%s", &choice);
+	
 	printf("Athlete Name: ");
 	scanf("%s", &name[counter]);
-
+	
 	while(strcmp(name[counter], "end") != 0) {  
 		printf("Athlete Time: ");
 		scanf("%f", &timeTaken[counter]);
@@ -40,12 +43,20 @@ int main ( ) {
 	}	
 	selectionSortLow(timeTaken, name, counter);
 	
+	//Writing to file.
+	FILE *in = fopen("output.txt", "r");
+	for(int x=0; x<=counter; x++) {
+		fscanf(in, "%s", &name[x]);
+		fscanf(in, "%d", &timeTaken[x]);
+	}
+	fclose(in);
+	
 	printf(" _______________________\n");
-	printf("| Athlete Name  | Time	|\n");
+	printf("| Athlete Name    | Time	|\n");
 	printf("|-------------------------------------------------------|\n");
 
 	for (int x = 0; x < counter; x++) {
-	printf(" %s            | %5.6f |\n", name[x], timeTaken[x]);
+	printf(" %s          | %5.6f |\n", name[x], timeTaken[x]);
 	}
 	printf("|-------------------------------------------------------|\n");
 }
