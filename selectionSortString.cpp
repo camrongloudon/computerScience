@@ -1,4 +1,4 @@
-// Use selection sort to sort an array of names in alphabetical order. 
+// Use selection sort to sort an array of names in alphabetical order. `
 
 #include <stdio.h>
 #include <stdlib.h>

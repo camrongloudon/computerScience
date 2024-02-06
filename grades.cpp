@@ -45,5 +45,5 @@ while ( strcmp(name, "finished") != 0 ) {
 	}	
 	
 printf("There are %d grades: ", counter);	
-printf("The average is %5.2f, %d failed and %d passed!", average, fail, pass);
+printf("The average is %5.2f, %d failed and %dd passed!", average, fail, pass);
 }
