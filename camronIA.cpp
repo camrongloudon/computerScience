@@ -19,43 +19,46 @@ void selectionSortLow(float arr[], char name[][20], int size) {
         strcpy(name[i], tempName);
 	}
 }
-int main ( ) {
-	int counter;
-	float timeTaken[100], times[100];
-	char name[100][20], fileNames[100][20], choice[1];
-	
-	counter = 0;
+typedef struct{
+	int racerNumber;
+	float timeTaken[100];
+	float times[100];
+	char name[100][20];
+	char fileNames[100][20];
+}racerInfo;
 
-	printf("Would you like to enter new scores of see previous? enter y for yes, n for no");
-	scanf("%s", &choice);
+int main ( ) {
+	racerInfo racers;
+	
+	racers.racerNumber = 0;
 	
 	printf("Athlete Name: ");
-	scanf("%s", &name[counter]);
+	scanf("%s", &racers.name[racers.racerNumber]);
 	
-	while(strcmp(name[counter], "end") != 0) {  
+	while(strcmp(racers.name[racers.racerNumber], "end") != 0) {  
 		printf("Athlete Time: ");
-		scanf("%f", &timeTaken[counter]);
+		scanf("%f", &racers.timeTaken[racers.racerNumber]);
 
-		counter++;	
+		racers.racerNumber++;	
 		
 		printf("Athlete Name: ");
-		scanf("%s", &name[counter]);
+		scanf("%s", &racers.name[racers.racerNumber]);
 	}	
-	selectionSortLow(timeTaken, name, counter);
+	selectionSortLow(timeTaken, name, racerNumber);
 	
 	//Writing to file.
-	FILE *in = fopen("output.txt", "r");
-	for(int x=0; x<=counter; x++) {
-		fscanf(in, "%s", &name[x]);
-		fscanf(in, "%d", &timeTaken[x]);
+	FILE *out = fopen("output.txt", "w");
+	for(int x=0; x<=racerNumber - 1; x++) {
+		fprintf(out, "%s\n", &name[x]);
+		fprintf(out, "%d\n", &timeTaken[x]);
 	}
-	fclose(in);
+	fclose(out);
 	
 	printf(" _______________________\n");
 	printf("| Athlete Name    | Time	|\n");
 	printf("|-------------------------------------------------------|\n");
 
-	for (int x = 0; x < counter; x++) {
+	for (int x = 0; x < racerNumber; x++) {
 	printf(" %s          | %5.6f |\n", name[x], timeTaken[x]);
 	}
 	printf("|-------------------------------------------------------|\n");
