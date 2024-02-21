@@ -28,7 +28,7 @@ typedef struct{
 }racerInfo;
 
 int main ( ) {
-	racerInfo racers;
+	racerInfo racers[100];
 	
 	racers.racerNumber = 0;
 	
