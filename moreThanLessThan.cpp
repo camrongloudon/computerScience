@@ -1,0 +1,93 @@
+// Ask for 3 numbers, store the average. Repeat it 3 times. Use linked list.
+
+#include<stdlib.h>
+#include<stdio.h>
+
+typedef struct node {
+	int num;
+	struct node *next;
+}Node, *Nodeptr;
+
+
+Nodeptr Makenode(int n) {
+	Nodeptr np = (Nodeptr)malloc(sizeof(node));
+	np -> num= n;
+	np -> next= NULL;
+	return np;
+}
+
+Nodeptr addfront (Nodeptr head, int n) {
+	Nodeptr np = Makenode(n);
+	np -> next = head;
+	head = np;
+	return head;
+}
+
+Nodeptr addinplace(Nodeptr head, int n){
+	Nodeptr np, curr, prev;
+	np = Makenode(n);
+	prev = NULL;
+	curr = head;
+	while (curr != NULL && n > curr -> num) {
+		prev = curr;
+		curr = curr -> next;
+	}
+	if (prev == NULL) {
+		np -> next = head;
+		return np;
+	}
+	np -> next = curr;
+	prev -> next = np;
+	return head;
+}
+
+//add last
+Nodeptr getlast(Nodeptr head) {
+	Nodeptr curr = head;
+	while((curr != NULL) && (curr -> next != NULL)) {
+		curr = curr -> next;
+	}
+	return curr;
+}
+
+Nodeptr addlast(Nodeptr head, int n) {
+	Nodeptr np = Makenode(n);
+	Nodeptr Last = getlast(head);
+	if (Last == NULL)
+		return np;
+	Last -> next = np;
+	return head;
+}
+
+void printlist(Nodeptr curr) {
+	while(curr != NULL){
+		printf("%d \n", curr -> num );
+		curr = curr -> next;
+	}
+}
+
+int main () {
+	Nodeptr lessThan50 = NULL;
+	Nodeptr moreEqual50 = NULL;
+	int num, i;
+	
+	printf("Enter 15 numbers: \n");
+	for (i =0; i < 15; i++) {
+		scanf("%d", &num);
+		if (num < 50) {
+			lessThan50 = addfront(lessThan50, num);
+		} else {
+			moreEqual50 = addfront(moreEqual50, num);
+		}
+	}
+	
+	printf("Numbers less than 50:\n");
+	printlist(lessThan50);
+	
+	printf("Numbers less than 50:\n");
+	printlist(lessThan50);
+}
+
+
+
+
