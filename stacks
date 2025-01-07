@@ -1,0 +1,52 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define Maxstack 10
+#define roguevalue -999
+
+typedef struct{
+  int top;
+	int st[Maxstack];
+}stackstype,*stack;
+
+//initialise a stack
+stack initstack(){
+stack sp=(stack)malloc(sizeof(stackstype));
+sp->top=-1;
+return sp;
+}
+
+//push(putting values in)
+void push (stack s,int n){
+	if(s->top==Maxstack-1){
+	printf("stack is full\n");
+	exit(1);
+}
+	s->top=s->top+1;//moving the arry
+	s->st[s->top]=n;//placing value inn ary
+}
+
+//pop(getting values out)
+int empty (stack s){
+	return(s->top==-1);
+}
+int pop (stack s){
+	if(empty(s))
+	return roguevalue;
+	int hold =s->st[s->top];
+	s->top=s->top-1;
+	return hold;
+}
+
+int main(){
+	stack s=initstack();
+	int n;
+	printf("enter some numbers \n");
+	scanf("%d",&n);
+	while(n!=-1){
+		push(s,n);
+		scanf("%d",&n);
+	}
+	printf("the numbers are:\n");
+	while(!empty(s))
+	printf("%d\n",pop(s));
+}
