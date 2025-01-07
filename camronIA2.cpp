@@ -51,13 +51,12 @@ void displayFastestAthlete(RacerNodePtr head) {
 
     float fastestTime = head->timeTaken;
 
-    printf(" _______________________________________________________________________________________________\n");
+    printf(" _________________________________________________\n");
     printf("| Statistic                     | Name                          | Time                          |\n");
-    printf("|-------------------------------|-------------------------------|-------------------------------|\n");
-    printf("| Fastest athlete               | %-30s| %-8.6f \n", head->name, fastestTime);
-    printf("|_______________________________|_______________________________|_______________________________|\n");
+    printf("|--------------------------------|-------------------------------|-------------------------------|\n");
+    printf("| Fastest athlete               | %-30s| %-8.6f |\n", head->name, fastestTime);
+    printf("|________________________________|_______________________________|_______________________________|\n");
 }
-
 
 // Function to display the slowest athlete
 void displaySlowestAthlete(RacerNodePtr head) {
@@ -75,16 +74,16 @@ void displaySlowestAthlete(RacerNodePtr head) {
         current = current->next;
     }
 
-
-    printf("| Slowest athlete               | %-30s| %-8.6f \n", slowestRacer->name, slowestTime);
-    printf("|_______________________________|_______________________________|_______________________________|\n");
+    // Adjusted table output to make the borders consistent
+    printf("| Slowest athlete               | %-30s| %-8.6f |\n", slowestRacer->name, slowestTime);
+    printf("|________________________________|_______________________________|_______________________________|\n");
 }
 
 // Function to print the racers list
 void printRacers(RacerNodePtr head) {
-    printf(" __________________________________\n");
-    printf("| Athlete Name         | Time     \n");
-    printf("|----------------------------------|\n");
+    printf(" ______________________________\n");
+    printf("| Athlete Name        | Time     |\n");
+    printf("|---------------------|----------|\n");
 
     RacerNodePtr current = head;
     while (current != NULL) {
@@ -92,19 +91,15 @@ void printRacers(RacerNodePtr head) {
         printf("| %-20s | %8.6f |\n", current->name, current->timeTaken);
         current = current->next;
     }
-    printf("|----------------------------------\n");
+    printf("|---------------------|----------|\n");
 }
-
 
 void printRacersStatistics(RacerNodePtr head) {
-
+    // Print the average time, fastest and slowest athlete
     printf("\n| Average time taken by athletes: %14.6f    |\n\n", calculateAverageTime(head));
     displayFastestAthlete(head);
-    displaySlowestAthlete(head);  
-
+    displaySlowestAthlete(head);
 }
-
-
 
 int main() {
     RacerNodePtr head = NULL;
@@ -139,14 +134,8 @@ int main() {
     printRacers(head);
 
     // Printouts
-//    printf("Average time taken by all athletes: %f\n", calculateAverageTime(head));
-//    printf("\n");
-//    displayFastestAthlete(head);
-//    printf("\n");
-//    displaySlowestAthlete(head);
+    printRacersStatistics(head);
 
-	printRacersStatistics(head);
-	
     printf("\nTHE DOCUMENT HAS BEEN PRINTED\n");
     return 0;
 }

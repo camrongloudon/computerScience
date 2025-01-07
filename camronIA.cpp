@@ -12,7 +12,7 @@ void selectionSortLow(float arr[], char name[][20], int size) {
     int temp = arr[smallest];
     arr[smallest] = arr[i];
     arr[i] = temp;
-    
+
     char tempName[25];
     strcpy(tempName, name[smallest]);
     strcpy(name[smallest], name[i]);
@@ -102,18 +102,18 @@ int main( ) {
     printf("Enter athlete names and finishing times. \nType 'end' to stop adding athletes!\n \n");
     printf("Athlete Name: ");
     scanf("%s", &racers.name[racers.racerNumber]);
-    
-    while(strcmp(racers.name[racers.racerNumber], "end") != 0) {  
+
+    while(strcmp(racers.name[racers.racerNumber], "end") != 0) {
         printf("Athlete Time: ");
         scanf("%f", &racers.timeTaken[racers.racerNumber]);
 
-        racers.racerNumber++;    
-        
+        racers.racerNumber++;
+
         printf("\nAthlete Name: ");
         scanf("%s", &racers.name[racers.racerNumber]);
-    }   
+    }
     selectionSortLow(racers.timeTaken, racers.name, racers.racerNumber);
-    
+
     // Writing to file.
     FILE *out = fopen("output.txt", "w");
     for(int x=0; x<=racers.racerNumber - 1; x++) {
@@ -121,7 +121,7 @@ int main( ) {
         fprintf(out, "%f \n", racers.timeTaken[x]);
     }
     fclose(out);
-    
+
     printf(" _______________________\n");
     printf("| Athlete Name    | Time |\n");
     printf("|------------------------|\n");
