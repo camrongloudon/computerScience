@@ -1,6 +1,6 @@
 //Selection Sort
 
-void slectionsort(int arr[], int size) {
+void selectionsort(int arr[], int size) {
 	for (int i = 0; i < size - 1; i++) {
 		int smallest = i;
 		for (int y = i + 1; y < size; y++) {
