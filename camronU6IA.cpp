@@ -111,7 +111,7 @@ int main() {
     char name[20];
     float time;
 
-    printf("Enter athlete names and finishing times.\nType 'end' to stop adding athletes!\n\n");
+    printf("Enter athlete nams then finishing time.\nType 'end' in the 'Athlete Name' field to stop adding athletes!\n\n");
     printf("Athlete Name: ");
     scanf("%s", name);
 
@@ -137,13 +137,6 @@ int main() {
     fclose(out);
 
     printRacers(head);
-
-    // Printouts
-//    printf("Average time taken by all athletes: %f\n", calculateAverageTime(head));
-//    printf("\n");
-//    displayFastestAthlete(head);
-//    printf("\n");
-//    displaySlowestAthlete(head);
 
 	printRacersStatistics(head);
 	
